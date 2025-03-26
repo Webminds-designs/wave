@@ -1,0 +1,12 @@
+/* frontend/src/index.css */
+@import "tailwindcss";
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
