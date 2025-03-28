@@ -111,14 +111,14 @@ const AboutWave = () => {
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full md:w-1/2 relative mt-8 md:mt-0"
+          className="w-full md:w-2/3 h-full relative mt-8 md:mt-0 flex md:flex-row justify-center  "
         >
           {/* Kitchen Image Container */}
           <motion.div
             initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             transition={{ duration: 0.7 }}
-            className="rounded-xl overflow-hidden relative py-8"
+            className="rounded-xl h-full overflow-hidden relative"
           >
             <motion.img
               initial={{ filter: "brightness(0.8)" }}
@@ -126,38 +126,21 @@ const AboutWave = () => {
               transition={{ duration: 1.2 }}
               src={kitchenImage1}
               alt="Kitchen"
-              className="w-full h-auto object-cover rounded-xl sm:rounded-4xl"
+              className="h-full w-auto object-cover rounded-xl sm:rounded-4xl"
             />
-
-            {/* Search Button
+          </motion.div>
+          {/* Established Bubble */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="flex items-end text-white xl:text-gray-500 py-1 px-2 mb-12"
+          >
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="absolute top-3 xs:top-4 sm:top-5 right-3 xs:right-4 sm:right-5 md:right-0 md:top-3 lg:right-3 lg:top-5 xl:right-55 2xl:right-55 2xl:top-5"
+              whileHover={{ scale: 1.05 }}
+              className="text-[10px] xs:text-xs md:text-sm"
             >
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="bg-[#1F1E1E] w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center shadow-lg 2xl:w-15 2xl:h-15"
-              >
-                <AiOutlineSearch className="text-white text-sm xs:text-lg sm:text-xl rotate-90" />
-              </motion.button>
-            </motion.div> */}
-
-            {/* Established Bubble */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              className="absolute bottom-1 xs:bottom-4 sm:bottom-5 md:bottom-2 lg:bottom-2 right-3 xs:right-4 sm:right-5 md:right-4 lg:right-3 flex items-center text-white xl:text-gray-500 py-1 px-2 xl:bottom-20"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-[10px] xs:text-xs md:text-sm"
-              >
-                [ Established 2025 ]
-              </motion.div>
+              [ Established 2025 ]
             </motion.div>
           </motion.div>
         </motion.div>
