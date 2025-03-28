@@ -44,7 +44,7 @@ export default function FAQSection() {
   const activeItem = faqData.find((item) => item.id === active);
 
   return (
-    <div className="grid md:grid-cols-2 gap-4 p-25 bg-[#F4F5F0] min-h-screen">
+    <div className="grid md:grid-cols-2 gap-4 p-4 md:p-25 bg-[#F4F5F0] min-h-screen">
       {/* Left Section */}
       <div>
         <h3 className="text-gray-400 uppercase text-sm">/About Wave</h3>
@@ -53,7 +53,7 @@ export default function FAQSection() {
           <br />
           Our Answers
         </h1>
-        <div className="mt-6 flex items-center space-x-4">
+        <div className="mt-6 flex flex-col md:flex-row items-center space-x-4">
           <span className="text-6xl text-gray-300">/{activeItem.id}</span>
           {activeItem.image && (
             <img

@@ -6,6 +6,7 @@ import Features from "../components/Features";
 import Products from "../components/Products";
 import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
+import Hero2 from "../components/Hero2";
 
 const Home = () => {
   return (
@@ -13,7 +14,8 @@ const Home = () => {
       <Header />
 
       <section id="home">
-        <Hero />
+        {/* <Hero /> */}
+        <Hero2 />
       </section>
 
       <section className="bg-black">
