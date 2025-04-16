@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/Logo.png";
 import { AiOutlineArrowUp, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
@@ -8,72 +9,41 @@ const Header = () => {
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Function to determine active section based on scroll position
-  // and handle header visibility based on scroll direction
   useEffect(() => {
-    const handleScroll = () => {
-      // Handle active nav section
-      const sections = ["home", "about", "features", "FAQ"];
-      const scrollPosition = window.scrollY + 100;
+    // Set active nav based on current path
+    const path = location.pathname.replace('/', '');
+    setActiveNav(path || 'home');
+  }, [location]);
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveNav(section);
-            break;
-          }
-        }
-      }
-
-      // Handle header visibility
-      const currentScrollPos = window.scrollY;
-
-      // Make header visible when at the very top of the page
-      if (currentScrollPos === 0) {
-        setVisible(true);
-      } else {
-        // Show header when scrolling up, hide when scrolling down
-        setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
-      }
-
-      setPrevScrollPos(currentScrollPos);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
-
-  // Handle smooth scrolling when clicking navigation links
   const handleNavClick = (e, sectionId) => {
     e.preventDefault();
     setActiveNav(sectionId);
     setMobileMenuOpen(false);
 
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: 'smooth'
-      });
+    // Navigate to the corresponding page
+    if (sectionId === 'home') {
+      navigate('/');
+    } else {
+      navigate(`/${sectionId}`);
     }
   };
 
+
+
   return (
     <div>
-      {/* Top Nav with visibility control */}
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{
           y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0
+          opacity: visible ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 right-0 flex items-center justify-between p-4 md:p-6 lg:p-8 z-30 bg-black/20 backdrop-blur-md"
       >
-        {/* Logo and text in one container */}
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -109,8 +79,8 @@ const Header = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 * (index + 1) }}
-              className={`relative hover:text-gray-300 transition-colors ${activeNav === item ? "after:w-full" : "after:w-0"
-                } after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:transition-all text-sm lg:text-base`}
+              className={`relative hover:text-gray-300 transition-colors text-sm lg:text-base after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:transition-all after:duration-300 ${activeNav === item ? "after:w-full" : "after:w-0"
+                }`}
               onClick={(e) => handleNavClick(e, item)}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -147,10 +117,11 @@ const Header = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden bg-white/20 backdrop-blur-sm rounded-full p-2 flex items-center justify-center ml-2"
           >
-            {mobileMenuOpen ?
-              <AiOutlineClose className="text-white text-xl" /> :
+            {mobileMenuOpen ? (
+              <AiOutlineClose className="text-white text-xl" />
+            ) : (
               <AiOutlineMenu className="text-white text-xl" />
-            }
+            )}
           </motion.button>
         </motion.div>
       </motion.div>
@@ -160,10 +131,11 @@ const Header = () => {
         initial={{ opacity: 0, height: 0 }}
         animate={{
           opacity: mobileMenuOpen ? 1 : 0,
-          height: mobileMenuOpen ? "100vh" : 0
+          height: mobileMenuOpen ? "100vh" : 0,
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-20 pt-20 ${mobileMenuOpen ? 'block' : 'hidden'}`}
+        className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-20 pt-20 ${mobileMenuOpen ? "block" : "hidden"
+          }`}
       >
         <div className="flex flex-col items-center justify-center gap-8 p-6 text-white">
           {["home", "about", "features", "FAQ"].map((item) => (
@@ -171,8 +143,9 @@ const Header = () => {
               key={item}
               href={`#${item}`}
               whileHover={{ scale: 1.1 }}
-              className={`text-xl font-medium ${activeNav === item ? 'text-white' : 'text-gray-400'}`}
               onClick={(e) => handleNavClick(e, item)}
+              className={`relative text-xl font-medium transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:transition-all after:duration-300 ${activeNav === item ? "after:w-full text-white" : "after:w-0 text-gray-400"
+                }`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </motion.a>
