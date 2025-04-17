@@ -54,7 +54,7 @@ const NewsletterSection = () => {
                                              py-1.5 sm:py-2 md:py-2.5
                                              text-sm sm:text-base 
                                              rounded-full flex items-center justify-center 
-                                             mr-1 hover:bg-gray-800 transition-colors duration-300"
+                                             mr-1 cursor-pointer"
                                 >
                                     Send
                                     <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
@@ -64,33 +64,32 @@ const NewsletterSection = () => {
                     </div>
 
                     {/* Paper plane image - responsive positioning */}
-                    <div className="relative w-full md:w-2/5 lg:w-1/3 overflow-visible 
-                                  mt-6 sm:mt-8 md:mt-0">
+                    <div className="relative w-full md:w-2/5 lg:w-1/3 overflow-visible mt-6 sm:mt-8 md:mt-0">
                         {/* Mobile view (centered) */}
                         <div className="block md:hidden w-full">
                             <img
                                 src={paperPlane}
                                 alt="Paper Plane"
-                                className="w-48 sm:w-56 md:w-64 
-                                         mx-auto object-contain 
-                                         transform translate-x-4 sm:translate-x-6"
+                                className="w-56 sm:w-64 md:w-72 mx-auto object-contain 
+                     transform translate-x-4 sm:translate-x-6
+                     hover:scale-105 transition-transform duration-300"
                             />
                         </div>
 
                         {/* Tablet and desktop view (overlapping) */}
                         <div className="hidden md:block 
-                                      absolute right-0 top-1/2 
-                                      transform -translate-y-2/3 
-                                      overflow-visible">
+                  absolute right-0 top-1/2 
+                  transform -translate-y-2/3 
+                  overflow-visible">
                             <img
                                 src={paperPlane}
                                 alt="Paper Plane"
-                                className="w-64 lg:w-80 xl:w-96 
-                                         object-contain 
-                                         transform translate-x-8 lg:translate-x-12 xl:translate-x-16"
+                                className="w-72 lg:w-[450px] xl:w-[1000px] object-contain 
+                     transform translate-x-8 lg:translate-x-12 xl:translate-x-16"
                             />
                         </div>
                     </div>
+
                 </div>
             </section>
             <Footer />
