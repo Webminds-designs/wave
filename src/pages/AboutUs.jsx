@@ -1,11 +1,20 @@
 import React from 'react';
 import AboutHero from '../components/AboutHero';
+import AboutContent from '../components/AboutContent';
+import Aboutfeatures from '../components/Aboutfeatures';
+import VideoSection from '../components/VideoSection ';
+import NewsletterSection from '../components/NewsletterSection';
 
 const AboutUs = () => {
     return (
         <div>
             <AboutHero />
-            {/* Additional content can be added here */}
+            <AboutContent />
+            <Aboutfeatures />
+            <VideoSection />
+            <NewsletterSection />
+
+
         </div>
     );
 }

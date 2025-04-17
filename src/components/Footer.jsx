@@ -13,7 +13,7 @@ const Footer = () => {
                 </div>
 
                 {/* Right Section - Navigation Links */}
-                <div className="flex flex-wrap gap-10 mt-6 md:mt-0 text-center md:text-left">
+                <div className="flex flex-wrap gap-10 mt-6 md:mt-10 text-center md:text-left">
                     {/* Navigation */}
                     <div>
                         <h3 className="font-semibold mb-4">Navigation</h3>
