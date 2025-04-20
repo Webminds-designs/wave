@@ -1,17 +1,25 @@
-import React from "react";
-import { motion } from "framer-motion";
-import productBenifits from "../../assets/images/productBenifits.png";
+import React from 'react';
+import { motion } from 'framer-motion';
+import productBenefits from '../../assets/images/productBenifits.png';
 
-const Benifits = () => {
+const Benefits = () => {
+  const items = [
+    { number: '01', text: 'Ultra-quiet operation at just 30 dB' },
+    { number: '02', text: 'Voice Recognition & App Control' },
+    { number: '03', text: 'Power-Saving Eco Mode' },
+    { arrow: true, text: 'Go to shop', highlighted: true },
+  ];
+
   return (
-    <section className="w-full h-screen flex flex-col justify-center bg-[#1F1E1E] text-white px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
-      <div className="container mx-auto max-w-7xl h-full flex flex-col justify-center">
+    <section className="w-full min-h-screen flex flex-col justify-center bg-[#1F1E1E] text-white px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
+      <div className="mx-auto max-w-7xl flex flex-col justify-center">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-8 sm:mb-10 md:mb-12 ml-30"
+          className="mb-8 sm:mb-10 md:mb-12 w-full px-4 sm:px-6 md:px-10 lg:px-16"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase">
             AUTOMATICALLY COOKS,
@@ -24,34 +32,28 @@ const Benifits = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 md:gap-12 h-fit">
+        {/* Content Rows */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 sm:gap-10 md:gap-12">
+          {/* List */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-4 sm:space-y-5 md:space-y-6 w-full lg:w-1/2 xl:w-2/5 ml-30"
+            className="w-full lg:w-1/2 xl:w-3/5 space-y-4 sm:space-y-5 md:space-y-6 px-4 sm:px-6 md:px-10 lg:px-16"
           >
-            {[
-              {
-                number: "01",
-                text: "Ultra-quiet operation at just 30 dB",
-              },
-              { number: "02", text: "Voice Recognition & App Control" },
-              { number: "03", text: "Power-Saving Eco Mode" },
-              { arrow: true, text: "Go to shop", highlighted: true },
-            ].map((benefit, index) => (
+            {items.map((item, idx) => (
               <motion.div
-                key={index}
+                key={idx}
                 initial={{ opacity: 0, x: -15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
+                transition={{ duration: 0.5, delay: 0.1 * idx }}
                 viewport={{ once: true }}
                 className="flex items-center"
               >
-                {benefit.arrow ? (
+                {item.arrow ? (
                   <motion.div
-                    whileHover={{ scale: 1.1, borderColor: "#fff" }}
+                    whileHover={{ scale: 1.1, borderColor: '#fff' }}
                     className="w-8 h-8 sm:w-10 sm:h-10 border border-[#7B5D45] rounded-full flex items-center justify-center mr-4 text-[#7B5D45] transition-colors"
                   >
                     <svg
@@ -73,30 +75,25 @@ const Benifits = () => {
                   </motion.div>
                 ) : (
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mr-4 text-sm sm:text-base border border-gray-700">
-                    {benefit.number}
+                    {item.number}
                   </div>
                 )}
-                <p
-                  className={`text-sm sm:text-base md:text-lg ${
-                    benefit.highlighted ? "text-[#7B5D45]" : "text-white"
-                  }`}
-                >
-                  {benefit.text}
-                </p>
+                <p className={`text-sm sm:text-base md:text-lg ${item.highlighted ? 'text-[#7B5D45]' : 'text-white'}`}>{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
 
+          {/* Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 xl:w-3/5 flex justify-center lg:justify-end mt-8 lg:mt-0"
+            className="w-full lg:w-1/2 xl:w-3/5 flex justify-center lg:justify-end mt-8 lg:mt-0 px-4 sm:px-6 md:px-10 lg:px-16"
           >
             <motion.img
               whileHover={{ scale: 1.05 }}
-              src={productBenifits}
+              src={productBenefits}
               alt="WAVE Smart Microwave"
               className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
             />
@@ -107,4 +104,4 @@ const Benifits = () => {
   );
 };
 
-export default Benifits;
+export default Benefits;

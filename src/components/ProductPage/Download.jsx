@@ -42,7 +42,7 @@ const Download = () => {
               <img
                 src={iphoneBack}
                 alt="iPhone background"
-                className="absolute transform -translate-y-6 z-10 w-64 md:w-[100rem]"
+                className="absolute transform -translate-y-6 z-10 w-64 lg:w-[100rem]"
               />
               <img
                 src={iphoneDownload}
