@@ -35,7 +35,7 @@ const AboutContent = () => {
             y: 0,
             opacity: 1,
             transition: {
-                duration: 0.6,
+                duration: 0.7,
                 ease: "easeOut"
             }
         }

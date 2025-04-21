@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion"; // Add this import
 import videoThumbnail from "../assets/images/video.png";
 
 const VideoSection = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
     const [showCursor, setShowCursor] = useState(false);
+
 
     const handleMouseMove = (e) => {
         setCursorPos({ x: e.clientX, y: e.clientY });
@@ -23,7 +25,12 @@ const VideoSection = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden relative group">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="max-w-6xl mx-auto rounded-3xl overflow-hidden relative group"
+            >
                 {/* Video element */}
                 <video
                     className="w-full h-auto object-cover"
@@ -42,15 +49,14 @@ const VideoSection = () => {
                     <button
                         onClick={() => {
                             setIsPlaying(true);
-                            setShowCursor(false); // hide cursor once playing
+                            setShowCursor(false);
                         }}
                         className="absolute inset-0 flex items-center justify-center z-20"
                     >
-                        {/* Transparent clickable area */}
                         <span className="sr-only">Play Video</span>
                     </button>
                 )}
-            </div>
+            </motion.div>
 
             {/* Custom Cursor for 'Play' */}
             {showCursor && (
