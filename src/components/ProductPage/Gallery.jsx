@@ -31,7 +31,7 @@ const Gallery = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center md:text-left"
+          className="text-center md:text-left ml-10"
         >
           <p className="text-sm sm:text-lg md:text-xl font-bold mb-4 text-white">
             Minimalist Elegance for Every Kitchen. <br className="hidden md:block" /> 
@@ -51,7 +51,7 @@ const Gallery = () => {
           <img
             src={kitchenImage}
             alt="WAVE Smart Microwave in kitchen"
-            className="rounded-lg w-4/5 h-auto object-cover"
+            className="rounded-lg w-4/5 h-auto object-cover mt-20"
             style={{
               transform: "translateX(-40%)", // Dynamic offset for smaller screens
             }}
