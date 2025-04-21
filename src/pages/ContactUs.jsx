@@ -6,8 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import mapImage from "../assets/images/map.jpg";
-import contactBack from "../assets/images/contactBack.jpeg";
+import contactBack from "../assets/images/contactBack.png";
 
 const ContactUsPage = () => {
   // State for accordion FAQ items
@@ -18,7 +17,7 @@ const ContactUsPage = () => {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   // Controls for animations
@@ -26,18 +25,24 @@ const ContactUsPage = () => {
   const mapControls = useAnimation();
   const cardControls = useAnimation();
   const faqControls = useAnimation();
-  
+
   // Refs for intersection observer
-  const [heroRef, heroInView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [heroRef, heroInView] = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
   const [mapRef, mapInView] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [cardRef, cardInView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [cardRef, cardInView] = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
   const [faqRef, faqInView] = useInView({ threshold: 0.2, triggerOnce: true });
 
   // Track window size
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Trigger animations when in view
@@ -54,7 +59,7 @@ const ContactUsPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
+    setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -86,6 +91,11 @@ const ContactUsPage = () => {
         "Wipe the interior with a damp cloth and mild detergent. For stubborn stains, heat a bowl of water for 2-3 minutes to create steam, then wipe clean. The exterior can be cleaned with a soft cloth.",
     },
     {
+      question: "Where can I find the user manual?",
+      answer:
+        "The user manual is available for download on our website under the 'Support' section. You can also find it in the Wave app under 'Resources'.",
+    },
+    {
       question: "Can I return or exchange the product?",
       answer:
         "Yes, we offer a 30-day return policy for unused products in original packaging. Exchanges are available for defective units within 90 days of purchase.",
@@ -103,7 +113,7 @@ const ContactUsPage = () => {
       <Header />
 
       {/* Hero Section with dynamic padding based on device size */}
-      <section 
+      <section
         ref={heroRef}
         className="text-center py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 xl:py-28 
                    px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 
@@ -134,18 +144,24 @@ const ContactUsPage = () => {
           will get back to you as soon as possible.
         </motion.p>
 
-        {/* Contact Form Card with Image Background - Responsive height/padding */}
+        {/* Contact Form Card with Image Background - Full width */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={heroControls}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="max-w-xs xs:max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl 
+          className="w-screen
                      mx-auto relative overflow-hidden 
                      rounded-xl sm:rounded-2xl md:rounded-3xl lg:rounded-4xl 
                      shadow-xl sm:shadow-2xl"
-          style={{ 
-            height: "auto", 
-            minHeight: isSmallScreen ? "550px" : isMediumScreen ? "620px" : "700px" 
+          style={{
+            height: "auto",
+            minHeight: isSmallScreen
+              ? "550px"
+              : isMediumScreen
+              ? "620px"
+              : "700px",
+            marginLeft: "calc(-50vw + 50%)",
+            marginRight: "calc(-50vw + 50%)",
           }}
         >
           {/* Full-size background image with fallback background color */}
@@ -155,38 +171,35 @@ const ContactUsPage = () => {
               alt="Contact Background"
               className="w-full h-full object-cover"
               onError={(e) => {
-                e.target.style.display = 'none';  // Hide image on error, falling back to gradient
+                e.target.style.display = "none"; // Hide image on error, falling back to gradient
               }}
             />
           </div>
 
           {/* Glass panel containing the form - responsive padding and sizing */}
-          <div className="absolute inset-0 w-full h-full 
+          <div
+            className="absolute inset-0 w-full h-full 
                           flex items-center justify-center 
-                          p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10">
-            <div className="bg-white/55 backdrop-blur-md 
-                           w-full 
-                           max-w-xs xs:max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-4xl 
+                          p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10"
+          >
+            <div
+              className="bg-white/55 backdrop-lur-md 
+                           w-11/12 sm:w-10/12 md:w-9/12 lg:w-8/12 xl:w-7/12 
                            rounded-lg sm:rounded-xl md:rounded-2xl 
                            p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 
-                           shadow-lg border border-white/20">
-              <h3 className="text-black 
-                             text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-2xl 
-                             font-semibold 
-                             mb-4 xs:mb-5 sm:mb-6 md:mb-6 lg:mb-8 
-                             text-left">
-                Contact Us
-              </h3>
-
-              <form 
+                           shadow-lg border border-white/20"
+            >
+              <form
                 onSubmit={handleSubmit}
                 className="grid grid-cols-1 md:grid-cols-2 
                            gap-x-3 xs:gap-x-4 sm:gap-x-5 md:gap-x-6 
                            gap-y-2 xs:gap-y-3 sm:gap-y-3 md:gap-y-4"
               >
                 <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
-                  <label className="text-xxs xs:text-xs sm:text-xs md:text-sm 
-                                    text-gray-700 font-medium block text-left">
+                  <label
+                    className="text-xxs xs:text-xs sm:text-xs md:text-sm 
+                                    text-black font-semibold block text-left"
+                  >
                     Name
                   </label>
                   <input
@@ -207,8 +220,10 @@ const ContactUsPage = () => {
                 </div>
 
                 <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
-                  <label className="text-xxs xs:text-xs sm:text-xs md:text-sm 
-                                    text-gray-700 font-medium block text-left">
+                  <label
+                    className="text-xxs xs:text-xs sm:text-xs md:text-sm 
+                                    text-black font-semibold block text-left"
+                  >
                     Email
                   </label>
                   <input
@@ -229,8 +244,10 @@ const ContactUsPage = () => {
                 </div>
 
                 <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
-                  <label className="text-xxs xs:text-xs sm:text-xs md:text-sm 
-                                    text-gray-700 font-medium block text-left">
+                  <label
+                    className="text-xxs xs:text-xs sm:text-xs md:text-sm 
+                                    text-black font-semibold block text-left"
+                  >
                     Phone Number
                   </label>
                   <input
@@ -250,8 +267,10 @@ const ContactUsPage = () => {
                 </div>
 
                 <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
-                  <label className="text-xxs xs:text-xs sm:text-xs md:text-sm 
-                                    text-gray-700 font-medium block text-left">
+                  <label
+                    className="text-xxs xs:text-xs sm:text-xs md:text-sm 
+                                    text-black font-semibold block text-left"
+                  >
                     Subject
                   </label>
                   <input
@@ -272,8 +291,10 @@ const ContactUsPage = () => {
                 </div>
 
                 <div className="space-y-1 xs:space-y-1.5 sm:space-y-2 md:col-span-2">
-                  <label className="text-xxs xs:text-xs sm:text-xs md:text-sm 
-                                    text-gray-700 font-medium block text-left">
+                  <label
+                    className="text-xxs xs:text-xs sm:text-xs md:text-sm 
+                                    text-black font-semibold block text-left"
+                  >
                     Message
                   </label>
                   <textarea
@@ -294,9 +315,11 @@ const ContactUsPage = () => {
                   ></textarea>
                 </div>
 
-                <div className="md:col-span-2 
+                <div
+                  className="md:col-span-2 
                                 mt-4 xs:mt-5 sm:mt-6 md:mt-8 
-                                flex justify-start">
+                                flex justify-start"
+                >
                   <motion.button
                     type="submit"
                     whileHover={{ scale: 1.05 }}
@@ -336,12 +359,12 @@ const ContactUsPage = () => {
       </section>
 
       {/* Map and Contact Info Section - completely responsive layout */}
-      <section 
+      <section
         className={`
           py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24
           px-4 xs:px-5 sm:px-6 md:px-8 lg:px-16 xl:px-24
           relative
-          ${isSmallScreen ? 'flex flex-col-reverse' : 'block'}
+          ${isSmallScreen ? "flex flex-col-reverse" : "block"}
         `}
       >
         {/* Map Background - responsive positioning and sizing */}
@@ -353,20 +376,25 @@ const ContactUsPage = () => {
           className={`
             w-full 
             flex items-center justify-center
-            ${isSmallScreen ? 'ml-0 mt-8' : isMediumScreen ? 'ml-16' : 'ml-40'}
+            ${isSmallScreen ? "ml-0 mt-8" : isMediumScreen ? "ml-16" : "ml-40"}
           `}
         >
-          {/* Map image with responsive dimensions */}
-          <img
-            src={mapImage}
-            alt="Location Map"
+          {/* Map iframe with responsive dimensions */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4324.896600766587!2d79.97461916999812!3d6.915077185871146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2slk!4v1745215518626!5m2!1sen!2slk"
             className={`
               rounded-xl xs:rounded-2xl sm:rounded-3xl md:rounded-[40px]
               shadow-md sm:shadow-lg
-              ${isSmallScreen ? 'w-full' : isMediumScreen ? 'w-10/12' : 'w-8/12'}
-              h-full object-cover
+              ${
+                isSmallScreen ? "w-full" : isMediumScreen ? "w-10/12" : "w-8/12"
+              }
+              h-[50rem] object-cover
             `}
-          />
+            style={{ border: 0, minHeight: "300px", filter: "grayscale(100%)" }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </motion.div>
 
         {/* Contact Card - Responsive positioning */}
@@ -377,24 +405,29 @@ const ContactUsPage = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`
             bg-[#181818] text-white
-            p-4 xs:p-5 sm:p-6 md:p-8
+            p-4 xs:p-5 sm:p-6 md:p-8 md:py-13
             rounded-lg
             shadow-xl
-            ${isSmallScreen
-              ? 'w-full'
-              : isMediumScreen
-                ? 'md:w-auto md:min-w-[240px] absolute top-1/2 left-8 transform -translate-y-1/2 z-10'
-                : 'md:w-auto md:min-w-[300px] absolute top-1/2 left-1/6 transform -translate-y-1/2 z-10'
+            ${
+              isSmallScreen
+                ? "w-full"
+                : isMediumScreen
+                ? "md:w-auto md:min-w-[240px] absolute top-1/2 left-8 transform -translate-y-1/2 z-10"
+                : "md:w-auto md:min-w-[300px] absolute top-1/2 left-1/6 transform -translate-y-1/2 z-10"
             }
           `}
         >
-          <h2 className="text-base xs:text-lg font-medium mb-4 xs:mb-5 sm:mb-6">GET IN TOUCH</h2>
+          <h2 className="text-base xs:text-lg font-medium mb-4 xs:mb-5 sm:mb-6 text-center">
+            GET IN TOUCH
+          </h2>
 
-          <div className="space-y-4 xs:space-y-5 sm:space-y-6">
+          <div className="space-y-4 xs:space-y-5 sm:space-y-20">
             <div className="flex items-start gap-2 xs:gap-3">
               <IoLocationOutline className="text-lg xs:text-xl mt-1" />
               <div>
-                <p className="text-gray-400 text-xs xs:text-sm mb-0.5 xs:mb-1">Address</p>
+                <p className="text-gray-400 text-xs xs:text-sm mb-0.5 xs:mb-1">
+                  Address
+                </p>
                 <p className="text-xs xs:text-sm">
                   1234 Webster Avenue
                   <br />
@@ -406,7 +439,9 @@ const ContactUsPage = () => {
             <div className="flex items-start gap-2 xs:gap-3">
               <FiPhone className="text-lg xs:text-xl mt-1" />
               <div>
-                <p className="text-gray-400 text-xs xs:text-sm mb-0.5 xs:mb-1">Contact</p>
+                <p className="text-gray-400 text-xs xs:text-sm mb-0.5 xs:mb-1">
+                  Contact
+                </p>
                 <p className="text-xs xs:text-sm">(+1) 234 567 890</p>
                 <p className="text-xs xs:text-sm">general@waveproducts.com</p>
               </div>
@@ -416,7 +451,7 @@ const ContactUsPage = () => {
       </section>
 
       {/* FAQ Section - Responsive padding and border radius */}
-      <section 
+      <section
         ref={faqRef}
         className={`
           bg-[#181818] text-white
@@ -436,51 +471,118 @@ const ContactUsPage = () => {
           HAVE ANY QUESTIONS?
         </motion.h2>
 
-        <div className="max-w-xs xs:max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto">
-          {faqItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="mb-2 xs:mb-3 sm:mb-4"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center 
-                           w-full text-left 
-                           p-3 xs:p-4 
-                           border-b border-gray-800 
-                           focus:outline-none 
-                           hover:bg-gray-900/30 transition-colors
-                           rounded-t-md"
-              >
-                <span className="font-medium text-sm xs:text-base pr-4">{item.question}</span>
-                <BsChevronDown
-                  className={`transform transition-transform flex-shrink-0 text-sm xs:text-base ${
-                    openFAQ === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+        <div className="max-w-xs xs:max-w-sm sm:max-w-md md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto">
+          {/* Two column layout on medium screens and larger */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+            {/* Left Column */}
+            <div>
+              {faqItems
+                .slice(0, Math.ceil(faqItems.length / 2))
+                .map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="mb-2 xs:mb-3 sm:mb-4"
+                  >
+                    <button
+                      onClick={() => toggleFAQ(index)}
+                      className="flex justify-between items-center 
+                               w-full text-left 
+                               p-3 xs:p-4 
+                               border-b border-gray-800 
+                               focus:outline-none 
+                               hover:bg-gray-900/30 transition-colors
+                               rounded-t-md"
+                    >
+                      <span className="font-medium text-sm xs:text-base pr-4">
+                        {item.question}
+                      </span>
+                      <BsChevronDown
+                        className={`transform transition-transform flex-shrink-0 text-sm xs:text-base ${
+                          openFAQ === index ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
 
-              {openFAQ === index && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-3 xs:p-4 pt-2 
-                             text-gray-400 
-                             text-xs xs:text-sm
-                             bg-gray-900/20
-                             rounded-b-md"
-                >
-                  {item.answer}
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
+                    {openFAQ === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="p-3 xs:p-4 pt-2 
+                                 text-gray-400 
+                                 text-xs xs:text-sm
+                                 bg-gray-900/20
+                                 rounded-b-md"
+                      >
+                        {item.answer}
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ))}
+            </div>
+
+            {/* Right Column */}
+            <div>
+              {faqItems
+                .slice(Math.ceil(faqItems.length / 2))
+                .map((item, index) => {
+                  // Calculate the actual index in the full array
+                  const actualIndex = index + Math.ceil(faqItems.length / 2);
+
+                  return (
+                    <motion.div
+                      key={actualIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="mb-2 xs:mb-3 sm:mb-4"
+                    >
+                      <button
+                        onClick={() => toggleFAQ(actualIndex)}
+                        className="flex justify-between items-center 
+                                 w-full text-left 
+                                 p-3 xs:p-4 
+                                 border-b border-gray-800 
+                                 focus:outline-none 
+                                 hover:bg-gray-900/30 transition-colors
+                                 rounded-t-md"
+                      >
+                        <span className="font-medium text-sm xs:text-base pr-4">
+                          {item.question}
+                        </span>
+                        <BsChevronDown
+                          className={`transform transition-transform flex-shrink-0 text-sm xs:text-base ${
+                            openFAQ === actualIndex ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+
+                      {openFAQ === actualIndex && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="p-3 xs:p-4 pt-2 
+                                   text-gray-400 
+                                   text-xs xs:text-sm
+                                   bg-gray-900/20
+                                   rounded-b-md"
+                        >
+                          {item.answer}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  );
+                })}
+            </div>
+          </div>
         </div>
       </section>
 
