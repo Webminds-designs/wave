@@ -6,7 +6,7 @@ import wave from "../../assets/images/wave.png";
 
 const Download = () => {
   return (
-    <section className="text-white py-16 w-screen h-screen relative">
+    <section className="text-white py-16 w-screen h-screen relative mb-20">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header Text */}
         <motion.div
@@ -58,7 +58,7 @@ const Download = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="w-full md:w-2/5 text-left absolute top-[30rem] left-0"
+            className="w-full md:w-2/5 text-left absolute md:top-[30rem] left-0"
           >
             <div className="pl-0 md:pl-4">
               <h3 className="text-3xl md:text-4xl font-bold uppercase leading-tight">

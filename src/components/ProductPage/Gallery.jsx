@@ -19,7 +19,7 @@ const Gallery = () => {
         <img
           src={ovenImage}
           alt="WAVE Smart Microwave"
-          className="rounded-[50px] w-full h-auto object-cover"
+          className="rounded-2xl w-full h-auto object-cover"
         />
       </motion.div>
 
