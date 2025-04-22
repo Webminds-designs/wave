@@ -149,7 +149,7 @@ const ContactUsPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={heroControls}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-screen
+          className="w-[screen]
                      mx-auto relative overflow-hidden 
                      rounded-xl sm:rounded-2xl md:rounded-3xl lg:rounded-4xl 
                      shadow-xl sm:shadow-2xl"
@@ -176,15 +176,15 @@ const ContactUsPage = () => {
             />
           </div>
 
-          {/* Glass panel containing the form - responsive padding and sizing */}
+          {/* Glass panel containing the form - full width and centered */}
           <div
             className="absolute inset-0 w-full h-full 
                           flex items-center justify-center 
                           p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10"
           >
             <div
-              className="bg-white/55 backdrop-lur-md 
-                           w-11/12 sm:w-10/12 md:w-9/12 lg:w-8/12 xl:w-7/12 
+              className="bg-white/55 backdrop-blur-md 
+                           w-full 
                            rounded-lg sm:rounded-xl md:rounded-2xl 
                            p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 
                            shadow-lg border border-white/20"
