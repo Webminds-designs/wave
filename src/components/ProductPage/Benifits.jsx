@@ -11,7 +11,7 @@ const Benefits = () => {
   ];
 
   return (
-    <section className="w-full min-h-screen flex flex-col justify-center bg-[#1F1E1E] text-white px-4 sm:px-8 md:px-12 lg:px-20 xl:px-24 py-14 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section className="w-full min-h-screen flex flex-col justify-center bg-[#1F1E1E] text-white px-2 sm:px-4 md:px-8 lg:px-12 xl:px-16 py-14 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl flex flex-col justify-center">
         {/* Heading */}
         <motion.div
@@ -19,28 +19,28 @@ const Benefits = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-10 sm:mb-12 md:mb-16 lg:mb-20 w-full px-4 sm:px-8 md:px-12 lg:px-20"
+          className="mb-10 sm:mb-12 md:mb-16 lg:mb-20 w-full px-2 sm:px-4 md:px-8 lg:px-12"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase">
             AUTOMATICALLY COOKS,
           </h2>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  font-bold uppercase text-[#7B5D45] mt-2">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-[#7B5D45] mt-2">
             GRILLS & REHEATS
           </h3>
-          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  font-bold uppercase mt-2">
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase mt-2">
             FOR A SMARTER KITCHEN <br className="hidden sm:block" /> EXPERIENCE
           </p>
         </motion.div>
 
         {/* Content Rows */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 sm:gap-12 md:gap-16">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 sm:gap-12 md:gap-16 lg:gap-64">
           {/* List */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 xl:w-3/5 space-y-6 sm:space-y-8 md:space-y-5 px-4 sm:px-8 md:px-12 lg:px-20"
+            className="w-full lg:w-2/5 space-y-6 sm:space-y-8 md:space-y-5 px-2 sm:px-4 md:px-6 lg:px-10"
           >
             {items.map((item, idx) => (
               <motion.div
@@ -95,13 +95,13 @@ const Benefits = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 xl:w-3/5 flex justify-center lg:justify-end mt-10 lg:mt-0 px-4 sm:px-8 md:px-12 lg:px-16"
+            className="w-full lg:w-3/5 xl:w-3/5 flex justify-center lg:justify-end mt-10 lg:mt-0 px-2 sm:px-3 md:px-4 lg:px-6"
           >
             <motion.img
               whileHover={{ scale: 1.05 }}
               src={productBenefits}
               alt="WAVE Smart Microwave"
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl object-contain"
+              className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl object-contain"
             />
           </motion.div>
         </div>

@@ -29,14 +29,14 @@ const Download = () => {
         </motion.div>
 
         {/* Phone Image and Download Section */}
-        <div className="flex flex-col items-center justify-between mt-12 relative">
+        <div className="flex flex-col items-center justify-between relative">
           {/* Phone Image */}
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative w-full md:w-3/5 h-96 md:h-auto mb-12 md:mb-0 top-90"
+            className="relative w-full md:w-3/5 h-96 md:h-auto mb-12 md:mb-0 md:top-60 top-90"
           >
             {/* Phone images stacked - centered in container */}
             <div className="relative mx-auto w-full max-w-4xl h-full flex items-center justify-center">
@@ -59,10 +59,10 @@ const Download = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="w-full md:w-2/5 text-left absolute md:top-[30rem] left-0"
+            className="w-full md:w-3/5 text-left absolute md:top-[30rem] left-0"
           >
             <div className="pl-0 md:pl-4">
-              <h3 className="text-3xl md:text-4xl font-bold uppercase leading-tight">
+              <h3 className="text-3xl lg:text-4xl font-bold uppercase leading-tight">
                 DOWNLOAD
                 <br />
                 WAVE
@@ -76,7 +76,7 @@ const Download = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="bg-white rounded-3xl flex items-center justify-center px-6 py-3"
+                  className="bg-white rounded-3xl flex items-center justify-center py-3 md:px-7 md:py-4 lg:px-6 lg:py-3"
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
@@ -96,7 +96,7 @@ const Download = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className="bg-white rounded-3xl flex items-center justify-center px-6 py-3"
+                  className="bg-white rounded-3xl flex items-center justify-center py-3 px-7 lg:px-6 lg:py-3"
                 >
                   <div className="flex items-center">
                     <span className="mr-3">

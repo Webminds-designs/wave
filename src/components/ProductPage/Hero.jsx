@@ -66,7 +66,7 @@ const Hero = () => {
   const getMarginTop = () => {
     if (windowSize.width < 640) return "mt-8";
     if (windowSize.width < 768) return "mt-10";
-    if (windowSize.width < 1024) return "mt-12";
+    if (windowSize.width < 1024) return "mt-1";
     if (windowSize.width < 1280) return "mt-16";
     return "mt-20";
   };
@@ -85,7 +85,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={`text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl text-center sm:text-left font-bold leading-tight mb-4 xs:mb-6 sm:mb-8 text-white ${getTitleOffset()} ${
+          className={`text-3xl xs:text-4xl z-30 sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl text-center sm:text-left font-bold leading-tight mb-4 xs:mb-6 sm:mb-8 text-white ${getTitleOffset()} ${
             windowSize.width < 768 ? "mt-8" : "mt-0"
           }`}
         >
@@ -126,7 +126,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           src={ovenImage}
           alt="WAVE Smart Microwave"
-          className={`relative z-10 w-[90%] xs:w-[85%] sm:w-[80%] md:w-[85%] lg:w-[90%] xl:w-[95%] max-w-3xl ${getImageOffset()} ${getMarginTop()}`}
+          className={`relative z-0 w-[90%] xs:w-[85%] sm:w-[80%] md:w-[85%] lg:w-[90%] xl:w-[95%] max-w-3xl ${getImageOffset()} ${getMarginTop()}`}
         />
 
         {/* Zoom Lens */}
