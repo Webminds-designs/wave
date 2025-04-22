@@ -104,52 +104,41 @@ const AboutContent = () => {
                 {/* Left Side: Text Content */}
                 <motion.div
                     className="flex-1 w-full lg:w-1/2 text-center lg:text-left"
-                    variants={itemVariants}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: false, amount: 0.3 }}
                 >
-                    <motion.h3
-                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black leading-tight mb-4 sm:mb-6"
-                        variants={itemVariants}
-                    >
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black leading-tight mb-4 sm:mb-6">
                         WELCOME TO WAVE, <br className="hidden sm:block" /> WHERE INNOVATION MEETS INTUITION.
-                    </motion.h3>
-                    <motion.p
-                        className="text-gray-600 mb-4 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
-                        variants={itemVariants}
-                    >
+                    </h3>
+                    <p className="text-gray-600 mb-4 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
                         We're not just designing appliances — we're shaping the future of smart kitchens.
-                    </motion.p>
-                    <motion.p
-                        className="text-gray-500 text-base sm:text-lg mb-1"
-                        variants={itemVariants}
-                    >
+                    </p>
+                    <p className="text-gray-500 text-base sm:text-lg mb-1">
                         Trusted by 10,000+ homes
-                    </motion.p>
-                    <motion.p
-                        className="text-gray-500 text-base sm:text-lg mb-6"
-                        variants={itemVariants}
-                    >
+                    </p>
+                    <p className="text-gray-500 text-base sm:text-lg mb-6">
                         Reviewed by <span className="font-semibold text-black text-lg sm:text-xl md:text-2xl">12K+</span> happy users.
-                    </motion.p>
+                    </p>
 
                     {/* Avatars */}
-                    <motion.div
-                        className="flex items-center justify-center lg:justify-start gap-0 -space-x-3 sm:-space-x-5 mt-4 sm:mt-6"
-                        variants={itemVariants}
-                    >
+                    <div className="flex items-center justify-center lg:justify-start gap-0 -space-x-3 sm:-space-x-5 mt-4 sm:mt-6">
                         {[user1, user2, user3, user4].map((user, index) => (
                             <motion.img
                                 key={index}
                                 src={user}
                                 alt={`User ${index + 1}`}
                                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-[#f1f2ed]"
-                                variants={itemVariants}
-                                custom={index} // For staggered animation
-                                initial="hidden"
-                                animate={controls}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.2 }}
+                                viewport={{ once: false, amount: 0.3 }}
                             />
                         ))}
-                    </motion.div>
+                    </div>
                 </motion.div>
+
 
                 {/* Right Side: Images */}
                 <motion.div
