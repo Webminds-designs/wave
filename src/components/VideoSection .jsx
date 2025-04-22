@@ -40,9 +40,10 @@ const VideoSection = () => {
                     muted
                     playsInline
                 >
-                    <source src="/your-video.mp4" type="video/mp4" />
+                    <source src="/videos/home-kitchen.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
+
 
                 {/* Click to play overlay */}
                 {!isPlaying && (
