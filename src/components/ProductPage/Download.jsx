@@ -36,7 +36,7 @@ const Download = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative w-full md:w-3/5 h-96 md:h-auto mb-12 md:mb-0 md:top-60 top-90"
+            className="relative w-full md:w-3/5 h-96 md:h-auto mb-12 md:mb-0 md:top-60 lg:top-80 top-90"
           >
             {/* Phone images stacked - centered in container */}
             <div className="relative mx-auto w-full max-w-4xl h-full flex items-center justify-center">
