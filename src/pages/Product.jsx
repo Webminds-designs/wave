@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Hero from "../components/ProductPage/Hero";
 import Features from "../components/ProductPage/Features";
-import Benifits from "../components/ProductPage/Benifits";
+import Benefits from "../components/ProductPage/Benefits";
 import Gallery from "../components/ProductPage/Gallery";
 import Download from "../components/ProductPage/Download";
 
@@ -13,7 +13,7 @@ export default function Product() {
       <Header />
       <Hero />
       <Features />
-      <Benifits />
+      <Benefits />
       <Gallery />
       <Download />
       <Footer />
