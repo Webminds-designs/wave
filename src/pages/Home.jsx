@@ -19,19 +19,19 @@ const Home = () => {
       </section>
 
       <section className="bg-black">
-        <div id="about">
+
           <AboutWave />
-        </div>
-        <div id="features">
+
+        <div >
           <Features />
         </div>
       </section>
 
-      <section id="products" className="bg-[#F4F5F0]">
+      <section className="bg-[#F4F5F0]">
         <Products />
       </section>
 
-      <section id="faq">
+      <section>
         <FAQSection />
       </section>
 

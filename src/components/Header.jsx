@@ -1,29 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/images/Logo.png";
-import { AiOutlineArrowUp, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineArrowUp,
+  AiOutlineMenu,
+  AiOutlineClose,
+} from "react-icons/ai";
 
 const Header = () => {
+  const location = useLocation();
   const [activeNav, setActiveNav] = useState("home");
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Function to determine active section based on scroll position
-  // and handle header visibility based on scroll direction
+  // Set active nav based on current path
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/") setActiveNav("home");
+    else if (path === "/products") setActiveNav("product");
+    else if (path === "/contactus") setActiveNav("contact us");
+    else setActiveNav("");
+  }, [location]);
+
+  // Handle header visibility based on scroll direction
   useEffect(() => {
     const handleScroll = () => {
-      // Handle active nav section
-      const sections = ["home", "about", "features", "FAQ"];
-      const scrollPosition = window.scrollY + 100;
+      // Handle active section on homepage only
+      if (location.pathname === "/") {
+        const sections = ["home", "about", "features", "FAQ"];
+        const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveNav(section);
-            break;
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (
+              scrollPosition >= offsetTop &&
+              scrollPosition < offsetTop + offsetHeight
+            ) {
+              setActiveNav(section);
+              break;
+            }
           }
         }
       }
@@ -44,20 +63,40 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, location.pathname]);
 
-  // Handle smooth scrolling when clicking navigation links
-  const handleNavClick = (e, sectionId) => {
+  // Handle navigation - either scroll to section or navigate to page
+  const handleNavClick = (e, item) => {
     e.preventDefault();
-    setActiveNav(sectionId);
     setMobileMenuOpen(false);
 
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: 'smooth'
-      });
+    // Map navigation items to their routes
+    const routes = {
+      home: "/",
+      product: "/products",
+      "contact us": "/contactus",
+      about: "/#about",
+      features: "/#features",
+      FAQ: "/#FAQ",
+    };
+
+    const route = routes[item];
+
+    // If it's a section on the current page, scroll to it
+    if (
+      location.pathname === "/" &&
+      ["about", "features", "FAQ"].includes(item)
+    ) {
+      const section = document.getElementById(item);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop,
+          behavior: "smooth",
+        });
+      }
+    } else {
+      // Otherwise navigate to the route
+      window.location.href = route;
     }
   };
 
@@ -68,30 +107,34 @@ const Header = () => {
         initial={{ y: -50, opacity: 0 }}
         animate={{
           y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0
+          opacity: visible ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 right-0 flex items-center justify-between p-4 md:p-6 lg:p-8 z-30 bg-black/20 backdrop-blur-md"
       >
-        {/* Logo and text in one container */}
+        {/* Logo and text in one container - link to home */}
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex items-center gap-2 sm:gap-3"
         >
-          <motion.img
-            whileHover={{ scale: 1.1 }}
-            src={logo}
-            alt="Logo"
-            className="w-5 h-5 sm:w-7 sm:h-7 md:w-10 md:h-6"
-          />
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-white text-lg sm:text-xl font-bold"
-          >
-            WAVE
-          </motion.div>
+          <Link to="/">
+            <motion.div className="flex items-center gap-2 sm:gap-3">
+              <motion.img
+                whileHover={{ scale: 1.1 }}
+                src={logo}
+                alt="Logo"
+                className="w-5 h-5 sm:w-7 sm:h-7 md:w-10 md:h-6"
+              />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="text-white text-lg sm:text-xl font-bold"
+              >
+                WAVE
+              </motion.div>
+            </motion.div>
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -101,16 +144,25 @@ const Header = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="hidden md:flex gap-8 lg:gap-16 xl:gap-24 text-white"
         >
-          {["home", "about", "features", "FAQ"].map((item, index) => (
+          {["home", "about", "product", "contact us"].map((item, index) => (
             <motion.a
               key={item}
-              href={`#${item}`}
+              href={
+                item === "home"
+                  ? "/"
+                  : item === "product"
+                  ? "/products"
+                  : item === "contact us"
+                  ? "/contactus"
+                  : `/#${item}`
+              }
               whileHover={{ scale: 1.1 }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 * (index + 1) }}
-              className={`relative hover:text-gray-300 transition-colors ${activeNav === item ? "after:w-full" : "after:w-0"
-                } after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:transition-all text-sm lg:text-base`}
+              className={`relative hover:text-gray-300 transition-colors ${
+                activeNav === item ? "after:w-full" : "after:w-0"
+              } after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-white after:transition-all text-sm lg:text-base`}
               onClick={(e) => handleNavClick(e, item)}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -125,20 +177,24 @@ const Header = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex items-center gap-0"
         >
-          <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "#e5e5e5" }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold transition-colors"
-          >
-            Explore
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.1, backgroundColor: "#e5e5e5" }}
-            whileTap={{ scale: 0.9, rotate: 45 }}
-            className="hidden sm:flex bg-white rounded-full p-1.5 sm:p-2 w-8 h-8 sm:w-10 sm:h-10 ml-2 sm:ml-4 transition-colors items-center justify-center"
-          >
-            <AiOutlineArrowUp className="text-black text-lg sm:text-xl rotate-45" />
-          </motion.button>
+          <Link to="/products">
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: "#e5e5e5" }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white text-black text-xs sm:text-sm font-semibold transition-colors"
+            >
+              Explore
+            </motion.button>
+          </Link>
+          <Link to="/products">
+            <motion.button
+              whileHover={{ scale: 1.1, backgroundColor: "#e5e5e5" }}
+              whileTap={{ scale: 0.9, rotate: 45 }}
+              className="hidden sm:flex bg-white rounded-full p-1.5 sm:p-2 w-8 h-8 sm:w-10 sm:h-10 ml-2 sm:ml-4 transition-colors items-center justify-center"
+            >
+              <AiOutlineArrowUp className="text-black text-lg sm:text-xl rotate-45" />
+            </motion.button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <motion.button
@@ -147,10 +203,11 @@ const Header = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden bg-white/20 backdrop-blur-sm rounded-full p-2 flex items-center justify-center ml-2"
           >
-            {mobileMenuOpen ?
-              <AiOutlineClose className="text-white text-xl" /> :
+            {mobileMenuOpen ? (
+              <AiOutlineClose className="text-white text-xl" />
+            ) : (
               <AiOutlineMenu className="text-white text-xl" />
-            }
+            )}
           </motion.button>
         </motion.div>
       </motion.div>
@@ -160,30 +217,44 @@ const Header = () => {
         initial={{ opacity: 0, height: 0 }}
         animate={{
           opacity: mobileMenuOpen ? 1 : 0,
-          height: mobileMenuOpen ? "100vh" : 0
+          height: mobileMenuOpen ? "100vh" : 0,
         }}
         transition={{ duration: 0.3 }}
-        className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-20 pt-20 ${mobileMenuOpen ? 'block' : 'hidden'}`}
+        className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-md z-20 pt-20 ${
+          mobileMenuOpen ? "block" : "hidden"
+        }`}
       >
         <div className="flex flex-col items-center justify-center gap-8 p-6 text-white">
-          {["home", "about", "features", "FAQ"].map((item) => (
+          {["home", "about", "product", "contact us"].map((item) => (
             <motion.a
               key={item}
-              href={`#${item}`}
+              href={
+                item === "home"
+                  ? "/"
+                  : item === "product"
+                  ? "/products"
+                  : item === "contact us"
+                  ? "/contactus"
+                  : `/#${item}`
+              }
               whileHover={{ scale: 1.1 }}
-              className={`text-xl font-medium ${activeNav === item ? 'text-white' : 'text-gray-400'}`}
+              className={`text-xl font-medium ${
+                activeNav === item ? "text-white" : "text-gray-400"
+              }`}
               onClick={(e) => handleNavClick(e, item)}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </motion.a>
           ))}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-4 px-8 py-3 rounded-full bg-white text-black font-semibold"
-          >
-            Explore
-          </motion.button>
+          <Link to="/products">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-4 px-8 py-3 rounded-full bg-white text-black font-semibold"
+            >
+              Explore
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
     </div>
