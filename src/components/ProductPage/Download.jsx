@@ -8,7 +8,7 @@ import wave from "../../assets/images/wave.png";
 
 const Download = () => {
   return (
-    <section className="text-white py-16 w-screen h-screen relative mb-20">
+    <section className="text-white py-16 w-screen h-screen relative mb-30">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header Text */}
         <motion.div
@@ -43,7 +43,7 @@ const Download = () => {
               <img
                 src={iphoneBack}
                 alt="iPhone background"
-                className="absolute transform -translate-y-6 z-10 w-64 lg:w-[100rem]"
+                className="absolute transform -translate-y-6 z-10 w-64 md:w-[55rem] lg:w-[100rem]"
               />
               <img
                 src={iphoneDownload}
@@ -127,7 +127,7 @@ const Download = () => {
         <img
           src={wave}
           alt="Wave Logo"
-          className="w-64 h-64 md:w-24 md:h-24 lg:w-[50rem] lg:h-[50rem] object-contain"
+          className="w-64 h-64 md:w-24 md:h-24 lg:w-[50rem] lg:h-[50rem] object-contain hidden lg:block"
         />
       </motion.div>
     </section>
